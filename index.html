@@ -1,73 +1,1030 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cybersecurity Lab Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberDefender Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f9f9f9;
+        :root {
+            --primary: #2dd4bf;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #8b5cf6;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        h1 {
-            color: #2c3e50;
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
         }
+
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), 
+                        url('/api/placeholder/1200/600') no-repeat center center/cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            animation: fadeUp 1.2s ease-out;
+        }
+
+        .cta-btn {
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeUp 1.4s ease-out;
+        }
+
+        .cta-btn:hover {
+            background-color: #14b8a6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-top: -2rem;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        .skills-section {
+            padding: 5rem 0;
+            background-color: #0f172a;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .labs-section {
+            padding: 5rem 0;
+        }
+
+        .labs-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .category-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 80%;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
         .lab-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-left: 5px solid #6c5ce7;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 5px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .lab-card:hover {
+            transform: translateX(10px);
+            background-color: #2d3748;
+        }
+
+        .lab-info {
+            flex: 1;
+        }
+
         .lab-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2d3436;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
+
         .lab-description {
-            margin-top: 5px;
-            color: #636e72;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .lab-badge {
+            background-color: var(--dark);
+            color: var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .lab-tools {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            background-color: rgba(45, 212, 191, 0.1);
+            color: var(--primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .lab-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-left: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #1e293b;
+            width: 90%;
+            max-width: 800px;
+            margin: 10vh auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.5s ease-out forwards;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lab-details p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .lab-details ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lab-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        .lab-details code {
+            background-color: #334155;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .tech-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background-color: #334155;
+            color: var(--light);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .skills-learned {
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item i {
+            color: var(--success);
+        }
+
+        .certs-section {
+            padding: 5rem 0;
+            background-color: #0f172a;
+        }
+
+        .cert-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cert-img {
+            height: 200px;
+            background: url('/api/placeholder/400/200') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .cert-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cert-logo {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cert-logo i {
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .cert-details {
+            padding: 1.5rem;
+        }
+
+        .cert-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-issuer {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .cert-date {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .projects-section {
+            padding: 5rem 0;
+        }
+
+        .project-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            height: 200px;
+            background: url('/api/placeholder/400/200') no-repeat center center/cover;
+        }
+
+        .project-details {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 0.5rem 1rem;
+            background-color: #334155;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .stats-section {
+            padding: 5rem 0;
+            background-color: #0f172a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .contact-section {
+            padding: 5rem 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #14b8a6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #0f172a;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: #1e293b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .terminal-effect {
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 1rem;
+            background-color: #0f172a;
+            font-family: monospace;
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            position: absolute;
+            top: -10px;
+            left: 15px;
+        }
+
+        .terminal-circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-circle.red {
+            background-color: var(--danger);
+        }
+
+        .terminal-circle.yellow {
+            background-color: var(--warning);
+        }
+
+        .terminal-circle.green {
+            background-color: var(--success);
+        }
+
+        .terminal-content {
+            color: #a5f3fc;
+            line-height: 1.4;
+            overflow-x: auto;
+            padding-top: 0.5rem;
+        }
+
+        .terminal-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-content .command {
+            color: var(--primary);
+        }
+
+        .terminal-content .prompt {
+            color: var(--success);
+        }
+
+        .terminal-content .result {
+            color: #cbd5e1;
+        }
+        
+        .typing {
+            position: relative;
+        }
+        
+        .typing::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            width: 8px;
+            height: 20px;
+            background-color: var(--primary);
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: #334155;
+            border: none;
+            border-radius: 5px;
+            color: var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                color: var(--light);
+                cursor: pointer;
+            }
+            
+            .skill-card,
+            .lab-card,
+            .cert-card,
+            .project-card {
+                transform: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Cybersecurity Lab Portfolio</h1>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 123.4.1 - Configure a Wireless Router and Client</div>
-        <div class="lab-description">Configured wireless settings and verified client connection using Packet Tracer.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 154.8.3 - Use a Port Scanner to Detect Open Ports</div>
-        <div class="lab-description">Used Nmap to scan for open TCP/UDP ports and analyze scan output.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 125.3.2 - Configure Authentication and Authorization in Linux</div>
-        <div class="lab-description">Configured PAM and access controls on a Linux system for authentication management.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 180.2.2 - Performing Threat Hunting</div>
-        <div class="lab-description">Demonstrated proactive threat hunting using logs, alerts, and behavioral patterns.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 181.5.3 - Assisted Lab: Performing Vulnerability Scanning</div>
-        <div class="lab-description">Conducted vulnerability assessments and interpreted scanning tool results.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 183.10.2 - Analyzing Potentially Malicious Files</div>
-        <div class="lab-description">Used static and dynamic analysis to investigate suspicious file behavior.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 200.2.1 - Splunk Fundamentals</div>
-        <div class="lab-description">Explored Splunk for security event indexing and querying using SPL.</div>
-    </div>
-    <div class="lab-card">
-        <div class="lab-title">GLAB 127.6.2 - Attack Analysis</div>
-        <div class="lab-description">Performed forensic log review and identified malicious activity.</div>
-    </div>
-</body>
-</html>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Cyber<span>Defender</span></div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#labs">Labs</a>
+                    <a href="#certifications">Certifications</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Cybersecurity <span style="color: var(--primary);">Specialist</span></h1>
+        <p>Defending networks, analyzing threats, and securing digital infrastructures through hands-on expertise and proven technical skills.</p>
+        <a href="#labs" class="cta-btn">Explore My Labs</a>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Core Competencies</h2>
+            <p class="section-subtitle">Technical expertise developed through extensive hands-on lab experience</p>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Network Security</h3>
+                    <p>Configuring secure wireless networks, implementing access controls, and defending against common network attacks.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>Vulnerability Management</h3>
+                    <p>Conducting thorough vulnerability assessments, risk analysis, and implementing effective remediation strategies.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Threat Hunting</h3>
+                    <p>Proactive identification of threats using IoC analysis, log review, and behavioral pattern detection.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-file-code"></i>
+                    <h3>Malware Analysis</h3>
+                    <p>Static and dynamic analysis of potentially malicious files to identify threats and understand attack vectors.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-terminal"></i>
+                    <h3>Linux & Windows Security</h3>
+                    <p>Authentication management, hardening systems, and implementing security controls across multiple OS environments.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>SIEM & Log Analysis</h3>
+                    <p>Using Splunk and other tools for effective security monitoring, event correlation, and incident detection.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-fingerprint"></i>
+                    <h3>Access Control</h3>
+                    <p>Implementing effective authentication mechanisms, ACLs, and privilege management to secure systems.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Cryptography</h3>
+                    <p>Implementing encryption algorithms, digital signatures, and secure communication protocols.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="labs" class="labs-section">
+        <div class="container">
+            <h2 class="section-title">Hands-On Lab Experience</h2>
+            <p class="section-subtitle">Practical applications of cybersecurity principles and technologies</p>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Labs</button>
+                <button class="filter-btn" data-filter="network">Network Security</button>
+                <button class="filter-btn" data-filter="vuln">Vulnerability Management</button>
+                <button class="filter-btn" data-filter="threat">Threat Detection</button>
+                <button class="filter-btn" data-filter="analysis">Security Analysis</button>
+                <button class="filter-btn" data-filter="linux">Linux Security</button>
+            </div>
+            
+            <div class="labs-container">
+                <h3 class="category-title">Network Security</h3>
+                
+                <div class="lab-card" data-category="network" onclick="openModal('wireless-router')">
+                    <div class="lab-info">
+                        <div class="lab-title">Wireless Router Configuration & Security</div>
+                        <div class="lab-description">Configured wireless settings and verified client connection using Packet Tracer.</div>
+                        <div class="lab-tools">
+                            <span class="tool-tag">Packet Tracer</span>
+                            <span class="tool-tag">WPA2</span>
+                            <span class="tool-tag">Wireless</span>
+                        </div>
+                    </div>
+                    <div class="lab-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                </div>
+                
+                <div class="lab-card" data-category="network" onclick="openModal('port-scanner')">
+                    <div class="lab-info">
+                        <div class="lab-title">Port Scanning & Network Discovery</div>
+                        <div class="lab-description">Used Nmap to scan for open TCP/UDP ports and analyze scan output.</div>
+                        <div class="lab-tools">
+                            <span class="tool-tag">Nmap</span>
+                            <span class="tool-tag">Port Scanning</span>
+                            <span class="tool-tag">Reconnaissance</span>
+                        </div>
+                    </div>
+                    <div class="lab-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                </div>
+                
+                <div class="lab-card"
